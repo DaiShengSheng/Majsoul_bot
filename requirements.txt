@@ -1,0 +1,4 @@
+bs4
+urllib
+urllib3
+pillow
