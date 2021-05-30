@@ -95,7 +95,8 @@ def printBasicInfo(IDdata,room_level):
         message = message + "\n没有查询到在四人东的对局数据呢~\n"
     else:
         message = message + processBasicInfo(data_list[2], room_level, "四人东")+"\n"
-    return message
+    pic = ImgText(message)
+    return pic.draw_text()
 
 
 def printExtendInfo(IDdata,room_level):
