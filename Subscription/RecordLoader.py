@@ -10,9 +10,6 @@ import time
 baseurl = "https://ak-data-2.sapk.ch/api/v2/pl4"
 path = dirname(__file__)
 
-# def main():
-#     #nickname = input()
-#     print(localLoad()[0])
 
 def getURL(url):
     headers = {
@@ -69,6 +66,3 @@ def jsonWriter(Record,gid,id):
         json.dump(datalist,fp,indent=4)
     return True
 
-
-# if __name__ == "__main__":
-#     main()
