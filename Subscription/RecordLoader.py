@@ -17,7 +17,7 @@ def getURL(url):
     }
     try:
         response = urllib.request.Request(url=url, headers=headers, method="GET")
-        req = urllib.request.urlopen(response)
+        req = urllib.request.urlopen(response,timeout=3)
         info = str(BeautifulSoup(req.read().decode('utf-8'), "html.parser"))
     except urllib.error.URLError as e:
         return e

@@ -83,13 +83,14 @@ async def openOrder(bot,ev:CQEvent):
         else:
             await bot.send(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
 
-@sv.scheduled_job('interval', minutes=2)
+@sv.scheduled_job('interval', minutes=3)
 async def record_scheduled():
     bot = get_bot()
     record = localLoad()
     for i in range(0,len(record)):
         playerRecord = selectRecord(record[i]["id"])
         compareRecord = json.loads(playerRecord)
+        sv.logger.info("正在检测更新"+str(record[i]["id"])+"的对局数据")
         if int(record[i]["endTime"]) < int(compareRecord[0]["endTime"]):
             message = updateData(playerRecord,record[i]["gid"])
             await bot.send_group_msg(group_id=int(record[i]["gid"]),message=message)

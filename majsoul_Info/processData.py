@@ -6,7 +6,7 @@ from PIL import ImageFont,ImageDraw,Image
 from io import BytesIO
 
 
-FILE_PATH = os.path.dirname(__file__)
+FILE_PATH = os.path.dirname(os.path.dirname(__file__))
 
 class ImgText:
     FONTS_PATH = os.path.join(FILE_PATH,'fonts')
