@@ -94,7 +94,7 @@ async def record_scheduled():
             continue
         compareRecord = json.loads(playerRecord)
         sv.logger.info("正在检测更新"+str(record[i]["id"])+"的对局数据")
-        if int(record[i]["endTime"]) < int(compareRecord[0]["endTime"]):
+        if int(record[i]["endTime"]) < int(compareRecord[i]["endTime"]):
             message = updateData(playerRecord,record[i]["gid"])
             await bot.send_group_msg(group_id=int(record[i]["gid"]),message=message)
 
