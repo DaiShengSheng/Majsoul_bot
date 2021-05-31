@@ -89,6 +89,9 @@ async def record_scheduled():
     record = localLoad()
     for i in range(0,len(record)):
         playerRecord = selectRecord(record[i]["id"])
+        if playerRecord == -1:
+            sv.logger.info("获取" + str(record[i]["id"]) + "的对局数据超时已自动跳过")
+            continue
         compareRecord = json.loads(playerRecord)
         sv.logger.info("正在检测更新"+str(record[i]["id"])+"的对局数据")
         if int(record[i]["endTime"]) < int(compareRecord[0]["endTime"]):

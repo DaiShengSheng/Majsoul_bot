@@ -34,10 +34,16 @@ def getID(nickname):#获取牌谱屋角色ID
 def selectRecord(id):
     localtime = time.time()
     urltime = str(int(localtime * 1000))  # 时间戳
+
     basicurl = baseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=16.12.9.15.11.8"
-    count = str(json.loads(getURL(basicurl))["count"])
+    data = getURL(basicurl)
+    if isinstance(data , urllib.error.URLError):
+        return -1
+    count = str(json.loads(data)["count"])
     recordurl = baseurl + "/player_records/"+str(id)+"/"+urltime+"/1262304000000?limit=2&mode=16.12.9.15.11.8&descending=true&tag="+count
     record = getURL(recordurl)
+    if isinstance(record , urllib.error.URLError):
+        return -1
     return record
 
 def localLoad():
