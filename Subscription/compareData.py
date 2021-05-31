@@ -72,13 +72,13 @@ class ImgText:
         return mes
 
 
-def updateData(record,gid):
+def updateData(record,gid,id):
     localdata = localLoad()
     data = json.loads(record)
     datalist = []
     message = ""
     for i in range(0,len(localdata)):
-        if data[0]["uuid"] != localdata[i]["uuid"] and gid == localdata[i]["gid"]:
+        if data[0]["uuid"] != localdata[i]["uuid"] and gid == localdata[i]["gid"] and localdata[i]["id"] == id:
             localdata[i]["uuid"] = data[0]["uuid"]
             localdata[i]["endTime"] = data[0]["endTime"]
             if localdata[i]["record_on"]:
