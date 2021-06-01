@@ -81,53 +81,63 @@ def chooseID(IDdata):
     return message
 
 
-def printBasicInfo(IDdata,room_level):
+def printBasicInfo(IDdata,room_level,num):
     message = "PS：本数据不包含金之间以下对局以及2019.11.29之前的对局\n"
     message = message + "昵称：" + str(IDdata["nickname"])+"  "
-    message = message + "当前段位：" + judgeLevel(str(IDdata["level"]["id"]))+"  "
-    message = message + "当前pt数：" + str(int(IDdata["level"]["score"])+int(IDdata["level"]["delta"]))+"\n"
-    data_list = selectInfo(IDdata["id"],room_level)
+    score = int(IDdata["level"]["score"])+int(IDdata["level"]["delta"])
+    message = message + processLevelInfo(score,str(IDdata["level"]["id"]))
+    if num == "4":
+        data_list = selectInfo(IDdata["id"],room_level)
+        room = "四"
+    else:
+        data_list = select_triInfo(IDdata["id"], room_level)
+        room = "三"
     if isinstance(data_list[0], urllib.error.URLError):
-        message = message + "\n没有查询到在四人南的对局数据呢~\n"
+        message = message + "\n没有查询到在" + room + "人南的对局数据呢~\n"
     else:
-        message = message + processBasicInfo(data_list[0], room_level, "四人南")+"\n"
+        message = message + processBasicInfo(data_list[0], room_level, room + "人南",num)+"\n"
     if isinstance(data_list[2], urllib.error.URLError):
-        message = message + "\n没有查询到在四人东的对局数据呢~\n"
+        message = message + "\n没有查询到在" + room + "人东的对局数据呢~\n"
     else:
-        message = message + processBasicInfo(data_list[2], room_level, "四人东")+"\n"
+        message = message + processBasicInfo(data_list[2], room_level, room + "人东",num)+"\n"
     pic = ImgText(message)
     return pic.draw_text()
 
 
-def printExtendInfo(IDdata,room_level):
+def printExtendInfo(IDdata,room_level,num):
     message = "PS：本数据不包含金之间以下对局以及2019.11.29之前的对局\n"
     message = message + "昵称：" + str(IDdata["nickname"]) + "  "
-    message = message + "当前段位：" + judgeLevel(str(IDdata["level"]["id"])) + "  "
-    message = message + "当前pt数：" + str(int(IDdata["level"]["score"]) + int(IDdata["level"]["delta"])) + "\n"
-    data_list = selectInfo(IDdata["id"], room_level)
+    score = int(IDdata["level"]["score"]) + int(IDdata["level"]["delta"])
+    message = message + processLevelInfo(score, str(IDdata["level"]["id"]))
+    if num == "4":
+        data_list = selectInfo(IDdata["id"],room_level)
+        room = "四"
+    else:
+        data_list = select_triInfo(IDdata["id"], room_level)
+        room = "三"
     if isinstance(data_list[0], urllib.error.URLError):
-        message = message + "\n没有查询到在"+ judgeRoom(room_level) + "四人南的对局数据呢~\n"
+        message = message + "\n没有查询到在"+ judgeRoom(room_level) + room + "人南的对局数据呢~\n"
     else:
-        message = message + processBasicInfo(data_list[0], room_level, "四人南")
-        message = message + processExtendInfo(data_list[1], room_level, "四人南")
+        message = message + processBasicInfo(data_list[0], room_level, room +"人南",num)
+        message = message + processExtendInfo(data_list[1], room_level, room +"人南")
     if isinstance(data_list[2], urllib.error.URLError):
-        message = message + "\n没有查询到在"+ judgeRoom(room_level) + "四人东的对局数据呢~\n"
+        message = message + "\n没有查询到在"+ judgeRoom(room_level) + room +"人东的对局数据呢~\n"
     else:
-        message = message + processBasicInfo(data_list[2], room_level, "四人东")
-        message = message + processExtendInfo(data_list[3], room_level, "四人东")
+        message = message + processBasicInfo(data_list[2], room_level, room +"人东",num)
+        message = message + processExtendInfo(data_list[3], room_level, room +"人东")
     pic = ImgText(message)
     return pic.draw_text()
 
-def printRecordInfo(IDdata):
+def printRecordInfo(IDdata,num):
     message = "PS：本数据不包含金之间以下对局以及2019.11.29之前的对局\n"
     message = message + "昵称：" + str(IDdata["nickname"]) + "  "
-    message = message + "当前段位：" + judgeLevel(str(IDdata["level"]["id"])) + "  "
-    message = message + "当前pt数：" + str(int(IDdata["level"]["score"]) + int(IDdata["level"]["delta"])) + "\n"
+    score = int(IDdata["level"]["score"]) + int(IDdata["level"]["delta"])
+    message = message + processLevelInfo(score, str(IDdata["level"]["id"]))
     record = selectRecord(IDdata["id"])
     if isinstance(record, urllib.error.URLError):
         message = message + "没有查询到在该玩家近期的对局数据呢~\n"
     else:
-        message = message + processRecordInfo(record)
+        message = message + processRecordInfo(record,num)
     pic = ImgText(message)
     return pic.draw_text()
 
@@ -152,22 +162,44 @@ def processExtendInfo(info,room_level,sessions):
     message = message + "和了巡数：" + str(round(float(removeNull(data["和了巡数"])),2)) + "  \n"
     return message
 
-def processBasicInfo(info,room_level,sessions):
+def processBasicInfo(info,room_level,sessions,num):
     data = json.loads(info)
     message = "\n【" + judgeRoom(room_level)+ sessions + "基础数据】\n"
     message = message + "总场次：" + str(data["count"])+"\n"
     message = message + "一位率：" + str(round(float(data["rank_rates"][0])*100,2)) + "%  "
-    message = message + "二位率：" + str(round(float(data["rank_rates"][1])*100,2)) + "%\n"
+    message = message + "二位率：" + str(round(float(data["rank_rates"][1])*100,2)) + "%  \n"
     message = message + "三位率：" + str(round(float(data["rank_rates"][2])*100,2)) + "%  "
-    message = message + "四位率：" + str(round(float(data["rank_rates"][3])*100,2)) + "%"
+    if num=="4":
+        message = message + "四位率：" + str(round(float(data["rank_rates"][3])*100,2)) + "%"
     return message
 
-def processRecordInfo(record):
+def processLevelInfo(score,level):
+    message = ""
+    intlevel = int(level)
+    if score < 0:
+        if intlevel % 10 ==1:
+            intlevel = intlevel-98
+            level = str(intlevel)
+        else:
+            level = str(intlevel-1)
+        score = level_start(level)
+    elif score > level_max(level):
+        if intlevel % 10 == 3:
+            intlevel = intlevel+98
+            level = str(intlevel)
+        else:
+            level = str(intlevel+1)
+        score = level_start(level)
+    message = message + "当前段位：" + judgeLevel(level)+"  "
+    message = message + "当前pt数：" + str(score)+"\n"
+    return message
+
+def processRecordInfo(record,num):
     data = json.loads(record)
     message = "\n该玩家最近五场对局信息如下：\n"
     for i in range(0,5):
         message = message + "\n【" + str(i+1) + "】牌谱ID：" + str(data[i]["uuid"]) +"\n"
-        for j in range(0,4):
+        for j in range(0,num):
             message = message + str(data[i]["players"][j]["nickname"]) + "(" + str(data[i]["players"][j]["score"])+")  "
         message = message + "\n"
         message = message + "对局开始时间：" + str(convertTime(data[i]["startTime"]))+"  "
@@ -175,16 +207,17 @@ def processRecordInfo(record):
     return message
 
 def judgeLevel(level):
-    if level == "10301": return "雀杰一"
-    elif level == "10302": return "雀杰二"
-    elif level == "10303": return "雀杰三"
-    elif level == "10401": return "雀豪一"
-    elif level == "10402": return "雀豪二"
-    elif level == "10403": return "雀豪三"
-    elif level == "10501": return "雀圣一"
-    elif level == "10502": return "雀圣二"
-    elif level == "10503": return "雀圣三"
-    elif level == "10601": return "魂天"
+    if level == "10203" or level == "20203": return "雀士三"
+    elif level == "10301" or level == "20301": return "雀杰一"
+    elif level == "10302" or level == "20302": return "雀杰二"
+    elif level == "10303" or level == "20303": return "雀杰三"
+    elif level == "10401" or level == "20401": return "雀豪一"
+    elif level == "10402" or level == "20402": return "雀豪二"
+    elif level == "10403" or level == "20403": return "雀豪三"
+    elif level == "10501" or level == "20501": return "雀圣一"
+    elif level == "10502" or level == "20502": return "雀圣二"
+    elif level == "10503" or level == "20503": return "雀圣三"
+    elif level == "10601" or level == "20601": return "魂天"
 
 def judgeRoom(room_level):
     if room_level == "0": return "总体"
@@ -202,3 +235,29 @@ def convertTime(datatime):
     timeArray = time.localtime(datatime)
     Time = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
     return Time
+
+def level_max(level):
+    if level == "10203" or level == "20203": return 1000
+    elif level == "10301" or level == "20301": return 1200
+    elif level == "10302" or level == "20302": return 1400
+    elif level == "10303" or level == "20303": return 2000
+    elif level == "10401" or level == "20401": return 2800
+    elif level == "10402" or level == "20402": return 3200
+    elif level == "10403" or level == "20403": return 3600
+    elif level == "10501" or level == "20501": return 4000
+    elif level == "10502" or level == "20502": return 6000
+    elif level == "10503" or level == "20503": return 9000
+    elif level == "10601" or level == "20601": return 9999999
+
+def level_start(level):
+    if level == "10203" or level == "20203": return 500
+    elif level == "10301" or level == "20301": return 600
+    elif level == "10302" or level == "20302": return 700
+    elif level == "10303" or level == "20303": return 1000
+    elif level == "10401" or level == "20401": return 1400
+    elif level == "10402" or level == "20402": return 1600
+    elif level == "10403" or level == "20403": return 1800
+    elif level == "10501" or level == "20501": return 2000
+    elif level == "10502" or level == "20502": return 3000
+    elif level == "10503" or level == "20503": return 4500
+    elif level == "10601" or level == "20601": return 10000
