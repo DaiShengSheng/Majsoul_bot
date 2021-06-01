@@ -8,6 +8,7 @@ import json
 import time
 
 baseurl = "https://ak-data-2.sapk.ch/api/v2/pl4"
+tribaseurl = "https://ak-data-2.sapk.ch/api/v2/pl3"
 path = dirname(__file__)
 
 
@@ -31,6 +32,14 @@ def getID(nickname):#获取牌谱屋角色ID
         return -1
     return data
 
+def getTriID(nickname):#获取牌谱屋角色ID
+    nickname = urllib.parse.quote(nickname) #UrlEncode转换
+    url = tribaseurl + "/search_player/"+nickname+"?limit=9"
+    data = json.loads(getURL(url))
+    if data == [] :
+        return -1
+    return data
+
 def selectRecord(id):
     localtime = time.time()
     urltime = str(int(localtime * 1000))  # 时间戳
@@ -46,10 +55,29 @@ def selectRecord(id):
         return -1
     return record
 
+def selectTriRecord(id):
+    localtime = time.time()
+    urltime = str(int(localtime * 1000))  # 时间戳
+    basicurl = tribaseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=22.24.26.21.23.25"
+    data = getURL(basicurl)
+    if isinstance(data , urllib.error.URLError):
+        return -1
+    count = str(json.loads(data)["count"])
+    recordurl = tribaseurl + "/player_records/"+str(id)+"/"+urltime+"/1262304000000?limit=2&mode=22.24.26.21.23.25&descending=true&tag="+count
+    record = getURL(recordurl)
+    if isinstance(record , urllib.error.URLError):
+        return -1
+    return record
+
 def localLoad():
     with open(join(path,'account.json'),encoding='utf-8') as fp:
         data = json.load(fp)
     #print(data[0]["uuid"])
+    return data
+
+def localTriLoad():
+    with open(join(path,'tri_account.json'),encoding='utf-8') as fp:
+        data = json.load(fp)
     return data
 
 def jsonWriter(Record,gid,id):
@@ -72,3 +100,22 @@ def jsonWriter(Record,gid,id):
         json.dump(datalist,fp,indent=4)
     return True
 
+def jsonTriWriter(Record,gid,id):
+    localdata = localTriLoad()
+    data = json.loads(Record)
+    datalist = []
+    for i in range(0,len(localdata)):
+        if localdata[i]["gid"] == str(gid) and localdata[i]["id"] == id:
+            return False
+        datalist.append(localdata[i])
+    binds = {
+        "id": id,
+        "uuid": str(data[0]["uuid"]),
+        "endTime": int(data[0]["endTime"]),
+        "gid": str(gid),
+        "record_on": True,
+    }
+    datalist.append(binds)
+    with open(join(path,'tri_account.json'),'w',encoding='utf-8') as fp:
+        json.dump(datalist,fp,indent=4)
+    return True

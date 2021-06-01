@@ -82,16 +82,32 @@ def updateData(record,gid,id):
             localdata[i]["uuid"] = data[0]["uuid"]
             localdata[i]["endTime"] = data[0]["endTime"]
             if localdata[i]["record_on"]:
-                message = message + processdata(data)
+                message = message + processdata(data,4)
         datalist.append(localdata[i])
     with open(join(path,'account.json'),'w',encoding='utf-8') as fp:
         json.dump(datalist,fp,indent=4)
     return message
 
-def processdata(data):
+def updateTriData(record,gid,id):
+    localdata = localTriLoad()
+    data = json.loads(record)
+    datalist = []
+    message = ""
+    for i in range(0,len(localdata)):
+        if data[0]["uuid"] != localdata[i]["uuid"] and gid == localdata[i]["gid"] and localdata[i]["id"] == id:
+            localdata[i]["uuid"] = data[0]["uuid"]
+            localdata[i]["endTime"] = data[0]["endTime"]
+            if localdata[i]["record_on"]:
+                message = message + processdata(data,3) + "测试"
+        datalist.append(localdata[i])
+    with open(join(path,'tri_account.json'),'w',encoding='utf-8') as fp:
+        json.dump(datalist,fp,indent=4)
+    return message
+
+def processdata(data,num):
     message = "本群侦测到新的对局："
     message = message + "\n牌谱ID：" + str(data[0]["uuid"]) + "\n"
-    for j in range(0, 4):
+    for j in range(0, num):
         message = message + str(data[0]["players"][j]["nickname"]) + "(" + str(data[0]["players"][j]["score"]) + ")  "
     message = message + "\n"
     message = message + "对局开始时间：" + str(convertTime(data[0]["startTime"])) + "  "
@@ -108,5 +124,20 @@ def selectNickname(id):
     localtime = time.time()
     urltime = str(int(localtime * 1000))  # 时间戳
     basicurl = baseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=16.12.9.15.11.8"
-    nickname = str(json.loads(getURL(basicurl))["nickname"])
+    data = getURL(basicurl)
+    if isinstance(data,urllib.error.URLError):
+        return -1
+    else:
+        nickname = str(json.loads(data)["nickname"])
+    return nickname
+
+def selectTriNickname(id):
+    localtime = time.time()
+    urltime = str(int(localtime * 1000))  # 时间戳
+    basicurl = tribaseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=22.24.26.21.23.25"
+    data = getURL(basicurl)
+    if isinstance(data,urllib.error.URLError):
+        return -1
+    else:
+        nickname = str(json.loads(data)["nickname"])
     return nickname
