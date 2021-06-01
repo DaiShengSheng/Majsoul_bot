@@ -12,6 +12,8 @@ async def majsoulInfo(bot, ev: CQEvent):
         nickname = ev.message.extract_plain_text()
         message = "\n"
         IDdata = getID(nickname)
+        if IDdata == -404:
+            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         sv.logger.info("正在查询" + nickname + "的对局数据")
         if IDdata == -1:
             await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
@@ -37,6 +39,8 @@ async def majsoulInfo(bot, ev: CQEvent):
         else:
             await bot.finish(ev, "房间等级输入不正确，请重新输入",at_sender=True)
         IDdata = getID(nickname)
+        if IDdata == -404:
+            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         if IDdata == -1:
             await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
         else:
@@ -55,6 +59,8 @@ async def majsoulInfo(bot, ev: CQEvent):
 async def RecordInfo(bot, ev: CQEvent):
     nickname = ev.message.extract_plain_text()
     IDdata = getID(nickname)
+    if IDdata == -404:
+        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     message = "\n"
     sv.logger.info("正在查询" + nickname + "的牌谱数据")
     if IDdata == -1:
@@ -76,6 +82,8 @@ async def majsoulInfo(bot, ev: CQEvent):
         message = "\n"
         sv.logger.info("正在查询" + nickname + "的对局数据")
         IDdata = gettriID(nickname)
+        if IDdata == -404:
+            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         if IDdata == -1:
             await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
         else:
@@ -101,6 +109,8 @@ async def majsoulInfo(bot, ev: CQEvent):
             await bot.finish(ev, "房间等级输入不正确，请重新输入",at_sender=True)
         sv.logger.info("正在查询" + nickname + "的对局数据")
         IDdata = gettriID(nickname)
+        if IDdata == -404:
+            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         if IDdata == -1:
             await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
         else:

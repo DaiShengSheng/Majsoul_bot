@@ -25,18 +25,24 @@ def getURL(url):
 def getID(nickname):#获取牌谱屋角色ID
     nickname = urllib.parse.quote(nickname) #UrlEncode转换
     url = baseurl + "/search_player/"+nickname+"?limit=9"
-    data = json.loads(getURL(url))
-    if data == [] :
+    data = getURL(url)
+    if isinstance(data,urllib.error.URLError):
+        return -404
+    datalist = json.loads(data)
+    if datalist == [] :
         return -1
-    return data
+    return datalist
 
 def gettriID(nickname):
     nickname = urllib.parse.quote(nickname) #UrlEncode转换
     url = tribaseurl + "/search_player/"+nickname+"?limit=9"
-    data = json.loads(getURL(url))
-    if data == [] :
+    data = getURL(url)
+    if isinstance(data,urllib.error.URLError):
+        return -404
+    datalist = json.loads(data)
+    if datalist == [] :
         return -1
-    return data
+    return datalist
 
 
 def selectLevel(room_level):

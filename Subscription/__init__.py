@@ -12,6 +12,8 @@ async def orderInfo(bot, ev: CQEvent):
     nickname = ev.message.extract_plain_text()
     IDdata = getID(nickname)
     message = ""
+    if IDdata == -404:
+        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     if IDdata == -1:
         await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次再进行订阅")
     else:
@@ -41,6 +43,8 @@ async def cancelOrder(bot,ev:CQEvent):
     record = localLoad()
     flag = False
     IDdata = getID(nickname)
+    if IDdata == -404:
+        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     datalist=[]
     if IDdata == -1:
         await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
@@ -65,6 +69,8 @@ async def openOrder(bot,ev:CQEvent):
     record = localLoad()
     flag = False
     IDdata = getID(nickname)
+    if IDdata == -404:
+        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     message = ""
     datalist=[]
     if IDdata == -1:
@@ -130,6 +136,8 @@ async def delInfo(bot,ev):
     record = localLoad()
     flag = False
     IDdata = getID(nickname)
+    if IDdata == -404:
+        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     datalist = []
     if IDdata == -1:
         await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
