@@ -183,7 +183,7 @@ def processLevelInfo(score,level):
         else:
             level = str(intlevel-1)
         score = level_start(level)
-    elif score > level_max(level):
+    elif score >= level_max(level):
         if intlevel % 10 == 3:
             intlevel = intlevel+98
             level = str(intlevel)
