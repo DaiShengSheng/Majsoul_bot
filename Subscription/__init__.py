@@ -118,11 +118,12 @@ async def orderSituation(bot,ev):
     else:
         message = message + "已查询到群"+str(gid)+"的订阅状态:\n"
         for i in range(0,len(datalist)):
-            data = selectTriNickname(datalist[i]["id"])
+            data = selectNickname(datalist[i]["id"])
+            sv.logger.info("正在获取"+str(datalist[i]["id"])+"的昵称信息")
             if data == -1:
                 await bot.finish(ev, "获取昵称信息失败，请重试")
             else:
-                message = message + "昵称：" + selectTriNickname(datalist[i]["id"]) + "    "
+                message = message + "昵称：" + selectNickname(datalist[i]["id"]) + "   "
             if datalist[i]["record_on"]:
                 message = message + "开启\n"
             else:
@@ -261,6 +262,7 @@ async def orderSituation(bot,ev):
         message = message + "已查询到群"+str(gid)+"的订阅状态:\n"
         for i in range(0,len(datalist)):
             data = selectTriNickname(datalist[i]["id"])
+            sv.logger.info("正在获取" + str(datalist[i]["id"]) + "的昵称信息")
             if data == -1:
                 await bot.finish(ev, "获取昵称信息失败，请重试")
             else:
