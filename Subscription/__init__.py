@@ -13,9 +13,9 @@ async def orderInfo(bot, ev: CQEvent):
     IDdata = getID(nickname)
     message = ""
     if IDdata == -404:
-        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+        await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     if IDdata == -1:
-        await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次再进行订阅")
+        await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次再进行订阅")
     else:
         if len(IDdata) > 1:
             gid = ev["group_id"]
@@ -44,10 +44,10 @@ async def cancelOrder(bot,ev:CQEvent):
     flag = False
     IDdata = getID(nickname)
     if IDdata == -404:
-        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+        await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     datalist=[]
     if IDdata == -1:
-        await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
+        await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
     else:
         for i in range(0,len(record)):
             if int(record[i]["gid"]) == int(gid) and IDdata[0]["id"]==record[i]["id"]:
@@ -70,11 +70,11 @@ async def openOrder(bot,ev:CQEvent):
     flag = False
     IDdata = getID(nickname)
     if IDdata == -404:
-        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+        await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     message = ""
     datalist=[]
     if IDdata == -1:
-        await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
+        await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
     else:
         for i in range(0,len(record)):
             if int(record[i]["gid"]) == int(gid) and IDdata[0]["id"]==record[i]["id"]:
@@ -120,7 +120,7 @@ async def orderSituation(bot,ev):
         for i in range(0,len(datalist)):
             data = selectTriNickname(datalist[i]["id"])
             if data == -1:
-                await bot.send(ev, "获取昵称信息失败，请重试")
+                await bot.finish(ev, "获取昵称信息失败，请重试")
             else:
                 message = message + "昵称：" + selectTriNickname(datalist[i]["id"]) + "    "
             if datalist[i]["record_on"]:
@@ -137,10 +137,10 @@ async def delInfo(bot,ev):
     flag = False
     IDdata = getID(nickname)
     if IDdata == -404:
-        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+        await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     datalist = []
     if IDdata == -1:
-        await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
+        await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~\n请在金之间以上房间对局一次后重试")
     else:
         for i in range(0, len(record)):
             if int(record[i]["gid"]) == int(gid) and IDdata[0]["id"] == record[i]["id"]:
@@ -262,7 +262,7 @@ async def orderSituation(bot,ev):
         for i in range(0,len(datalist)):
             data = selectTriNickname(datalist[i]["id"])
             if data == -1:
-                await bot.send(ev, "获取昵称信息失败，请重试")
+                await bot.finish(ev, "获取昵称信息失败，请重试")
             else:
                 message = message + "昵称：" + selectTriNickname(datalist[i]["id"]) + "    "
             if datalist[i]["record_on"]:

@@ -13,7 +13,7 @@ async def majsoulInfo(bot, ev: CQEvent):
         message = "\n"
         IDdata = getID(nickname)
         if IDdata == -404:
-            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+            await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         sv.logger.info("正在查询" + nickname + "的对局数据")
         if IDdata == -1:
             await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
@@ -40,9 +40,9 @@ async def majsoulInfo(bot, ev: CQEvent):
             await bot.finish(ev, "房间等级输入不正确，请重新输入",at_sender=True)
         IDdata = getID(nickname)
         if IDdata == -404:
-            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+            await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         if IDdata == -1:
-            await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
+            await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~")
         else:
             if len(IDdata) > 1:
                 message = message + "查询到多条角色昵称呢~，若输出不是您想查找的昵称，请补全查询昵称\n"
@@ -60,11 +60,11 @@ async def RecordInfo(bot, ev: CQEvent):
     nickname = ev.message.extract_plain_text()
     IDdata = getID(nickname)
     if IDdata == -404:
-        await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+        await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
     message = "\n"
     sv.logger.info("正在查询" + nickname + "的牌谱数据")
     if IDdata == -1:
-        await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
+        await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~")
     else:
         if len(IDdata) > 1:
             message = message + "查询到多条角色昵称呢~，若输出不是您想查找的昵称，请补全查询昵称\n"
@@ -83,9 +83,9 @@ async def majsoulInfo(bot, ev: CQEvent):
         sv.logger.info("正在查询" + nickname + "的对局数据")
         IDdata = gettriID(nickname)
         if IDdata == -404:
-            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+            await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         if IDdata == -1:
-            await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
+            await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~")
         else:
             if len(IDdata)>1:
                 message = message + "查询到多条角色昵称呢~，若输出不是您想查找的昵称，请补全查询昵称\n\n"
@@ -110,9 +110,9 @@ async def majsoulInfo(bot, ev: CQEvent):
         sv.logger.info("正在查询" + nickname + "的对局数据")
         IDdata = gettriID(nickname)
         if IDdata == -404:
-            await bot.send(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
+            await bot.finish(ev, "获取牌谱屋的数据超时了呢，请稍后再试哦~")
         if IDdata == -1:
-            await bot.send(ev, "没有查询到该角色在金之间以上的对局数据呢~")
+            await bot.finish(ev, "没有查询到该角色在金之间以上的对局数据呢~")
         else:
             if len(IDdata) > 1:
                 message = message + "查询到多条角色昵称呢~，若输出不是您想查找的昵称，请补全查询昵称\n"
