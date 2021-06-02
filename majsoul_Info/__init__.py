@@ -27,7 +27,7 @@ async def majsoulInfo(bot, ev: CQEvent):
                 await bot.send(ev,message,at_sender=True)
     elif len(args) == 2:
         nickname = args[1]
-        sv.logger.info("正在查询" + nickname + "的对局数据")
+        sv.logger.info("正在查询" + nickname + "的对局数据 ")
         message = "\n"
         room_level = ""
         if args[0] == "金场" or args[0] == "金" or args[0] == "金之间":

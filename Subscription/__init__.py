@@ -60,7 +60,7 @@ async def cancelOrder(bot,ev:CQEvent):
                 json.dump(datalist, fp, indent=4)
             await bot.send(ev,"昵称:"+ message +" 在本群的四麻订阅已成功关闭\n")
         else:
-            await bot.send(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
+            await bot.finish(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
 
 @sv.on_prefix("开启雀魂订阅")
 async def openOrder(bot,ev:CQEvent):
