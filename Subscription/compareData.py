@@ -98,7 +98,7 @@ def updateTriData(record,gid,id):
             localdata[i]["uuid"] = data[0]["uuid"]
             localdata[i]["endTime"] = data[0]["endTime"]
             if localdata[i]["record_on"]:
-                message = message + processdata(data,3) + "测试"
+                message = message + processdata(data,3)
         datalist.append(localdata[i])
     with open(join(path,'tri_account.json'),'w',encoding='utf-8') as fp:
         json.dump(datalist,fp,indent=4)
