@@ -8,7 +8,6 @@ help_txt = '''这是一个HoshinoBot的雀魂查询相关插件
 本插件数据来源于雀魂牌谱屋:https://amae-koromo.sapk.ch/
 项目地址：https://github.com/DaiShengSheng/Majsoul_bot
 由于牌谱屋不收录铜之间以及银之间牌谱，故所有数据仅统计2019年11月29日后金场及以上场次的数据
-PS：本插件暂时只支持四麻对局的查询，后续会完善三麻查询功能
 
 查询指令：
 雀魂信息/雀魂查询 昵称：查询该ID的雀魂基本对局数据(包含金场以上所有)

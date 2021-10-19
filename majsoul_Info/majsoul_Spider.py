@@ -6,8 +6,8 @@ import urllib.parse
 import json
 import time
 
-baseurl = "https://ak-data-2.sapk.ch/api/v2/pl4"
-tribaseurl = "https://ak-data-2.sapk.ch/api/v2/pl3"
+baseurl = "https://ak-data-3.sapk.ch/api/v2/pl4"
+tribaseurl = "https://ak-data-3.sapk.ch/api/v2/pl3"
 
 
 def getURL(url):

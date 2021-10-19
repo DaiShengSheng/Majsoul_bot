@@ -191,13 +191,19 @@ def processLevelInfo(score,level):
             level = str(intlevel+1)
         score = level_start(level)
     message = message + "当前段位：" + judgeLevel(level)+"  "
+    if judgeLevel(level)[0:2] == "魂天":
+        score = score / 100
     message = message + "当前pt数：" + str(score)+"\n"
     return message
 
 def processRecordInfo(record,num):
     data = json.loads(record)
-    message = "\n该玩家最近五场对局信息如下：\n"
-    for i in range(0,5):
+    message = "\n该玩家最近的对局信息如下：\n"
+    if len(data) < 5:
+        count = len(data)
+    else:
+        count = 5
+    for i in range(0,count):
         message = message + "\n【" + str(i+1) + "】牌谱ID：" + str(data[i]["uuid"]) +"\n"
         for j in range(0,num):
             message = message + str(data[i]["players"][j]["nickname"]) + "(" + str(data[i]["players"][j]["score"])+")  "
@@ -217,7 +223,7 @@ def judgeLevel(level):
     elif level == "10501" or level == "20501": return "雀圣一"
     elif level == "10502" or level == "20502": return "雀圣二"
     elif level == "10503" or level == "20503": return "雀圣三"
-    elif level == "10601" or level == "20601": return "魂天"
+    elif level[0:4] == "1070" or level[0:4] == "2070": return "魂天"+str(level[4])
 
 def judgeRoom(room_level):
     if room_level == "0": return "总体"
@@ -247,7 +253,8 @@ def level_max(level):
     elif level == "10501" or level == "20501": return 4000
     elif level == "10502" or level == "20502": return 6000
     elif level == "10503" or level == "20503": return 9000
-    elif level == "10601" or level == "20601": return 9999999
+    elif level[0:4] == "1070" or level[0:4] == "2070": return 2000
+    #elif level == "10601" or level == "20601": return 9999999
 
 def level_start(level):
     if level == "10203" or level == "20203": return 500
@@ -260,4 +267,5 @@ def level_start(level):
     elif level == "10501" or level == "20501": return 2000
     elif level == "10502" or level == "20502": return 3000
     elif level == "10503" or level == "20503": return 4500
-    elif level == "10601" or level == "20601": return 10000
+    elif level[0:4] == "1070" or level[0:4] == "2070": return 1000
+    #elif level == "10601" or level == "20601": return 10000
