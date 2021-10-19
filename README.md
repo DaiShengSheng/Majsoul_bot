@@ -71,6 +71,9 @@ pip install -r requirements.txt
 ![订阅的开启与删除](https://github.com/DaiShengSheng/Majsoul_bot/blob/master/screenshot/ControlRecord.png)
 
 # 更新记录
+### 2021-10-19
+* 运用极其暴力的手段修复了一些低级的bug，并更新了雀魂魂天段位的记分方式
+
 ### 2021-06-01
 * 更新了三麻信息查询以及订阅功能
 
