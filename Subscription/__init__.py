@@ -95,7 +95,7 @@ async def openOrder(bot,ev:CQEvent):
         else:
             await bot.send(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
 
-@sv.scheduled_job('interval', minutes=3)
+@sv.scheduled_job('interval', minutes=10)
 async def record_scheduled():
     bot = get_bot()
     record = localLoad()
@@ -246,7 +246,7 @@ async def openTriOrder(bot,ev:CQEvent):
         else:
             await bot.send(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
 
-@sv.scheduled_job('interval', minutes=3)
+@sv.scheduled_job('interval', minutes=10)
 async def Trirecord_scheduled():
     bot = get_bot()
     record = localTriLoad()
