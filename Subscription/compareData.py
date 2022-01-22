@@ -106,6 +106,7 @@ def updateTriData(record,gid,id):
 
 def processdata(data,num):
     message = "本群侦测到新的对局："
+    message = message + "\n对局场次："+ str(judgeRoomLevel(data[0]["modeId"]))
     message = message + "\n牌谱ID：" + str(data[0]["uuid"]) + "\n"
     for j in range(0, num):
         message = message + str(data[0]["players"][j]["nickname"]) + "(" + str(data[0]["players"][j]["score"]) + ")  "
@@ -141,3 +142,17 @@ def selectTriNickname(id):
     else:
         nickname = str(json.loads(data)["nickname"])
     return nickname
+
+def judgeRoomLevel(level):
+    if level == "8" : return "金之间 四人东"
+    elif level == "9": return "金之间 四人南"
+    elif level == "11": return "玉之间 四人东"
+    elif level == "12": return "玉之间 四人南"
+    elif level == "15": return "王座之间 四人东"
+    elif level == "16": return "王座之间 四人南"
+    elif level == "21": return "金之间 三人南"
+    elif level == "22": return "金之间 三人南"
+    elif level == "23": return "玉之间 三人东"
+    elif level == "24": return "玉之间 三人南"
+    elif level == "25": return "王座之间 三人东"
+    elif level == "26": return "王座之间 三人南"
