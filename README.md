@@ -70,6 +70,11 @@ pip install -r requirements.txt
 ### 订阅的开启与删除
 ![订阅的开启与删除](https://github.com/DaiShengSheng/Majsoul_bot/blob/master/screenshot/ControlRecord.png)
 
+# 近期更新计划
+* 个人信息查询的图形化页面编写（更好看的UI）
+* 雀魂卡池的的模拟抽卡
+* 麻兜（麻将猜手牌）
+
 # 更新记录
 ### 2021-10-19
 * 运用极其暴力的手段修复了一些低级的bug，并更新了雀魂魂天段位的记分方式
