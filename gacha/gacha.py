@@ -15,13 +15,33 @@ def gacha_loader():
         data = json.load(fp)
     return data
 
-def run_gacha():
+def run_gacha(group_id):
     result = []
     pool = gacha_loader()
+    group_pool = group_pool_loader()
+    group_pool_list = []
     purple_gift = pool["purple_gift"]
     purple_flag = 0
+    poolname = None
+
+    #定位该群卡池
+    for i in range(0,len(group_pool)):
+        if group_pool[i]["gid"] == str(group_id):
+            poolname = group_pool[i]["poolname"]
+        else:
+            group_pool_list.append(group_pool[i])
+    if poolname == None:
+        poolname = "up"
+        binds = {
+            "gid": str(group_id),
+            "poolname": "up"
+        }
+        group_pool_list.append(binds)
+        with open(join(path, 'group_pool.json'), 'w', encoding='utf-8') as fp:
+            json.dump(group_pool_list, fp, indent=4)
+
     for i in range (0,10):
-        result.append(single_pull(pool))
+        result.append(single_pull(pool,poolname))
         if result[i][0] < 80 and (result[i][1] not in purple_gift):
             purple_flag = purple_flag + 1
     if purple_flag == 10 and result[9][0] <= 95:
@@ -30,14 +50,13 @@ def run_gacha():
     return concat_images(result)
 
 
-def single_pull(pool):
+def single_pull(pool,pool_name):
     up_pool = []
-    for i in range (0,len(pool["up"])):
-        up_pool.append(pool["up"][i] + ".png")
+    for i in range (0,len(pool[pool_name])):
+        up_pool.append(pool[pool_name][i] + ".png")
     normal_pool = []
     for i in range (0,len(pool["normal"])):
         normal_pool.append(pool["normal"][i] + ".png")
-
 
     gift_list = file_loader("gift")  # 读取礼物
     decoration = file_loader("decoration")  # 读取特效装扮
@@ -85,7 +104,7 @@ def concat_images(image):
         img = img.resize((256, 256), Image.ANTIALIAS)
         image_files.append(img)  # 读取所有用于拼接的图片
 
-    target = Image.new('RGB', (UNIT_WIDTH_SIZE * COL+10, UNIT_HEIGHT_SIZE * ROW+10),(0,0,0,0))  # 创建成品图的画布
+    target = Image.new('RGB', (UNIT_WIDTH_SIZE * COL+10, UNIT_HEIGHT_SIZE * ROW+10),(255,255,255))  # 创建成品图的画布
     for row in range(ROW):
         for col in range(COL):
             target.paste(image_files[COL * row + col], (10 + UNIT_WIDTH_SIZE * col, 10 + UNIT_HEIGHT_SIZE * row))
@@ -97,3 +116,25 @@ def pil2b64(data):
     data.save(bio, format='JPEG', quality=75)
     base64_str = base64.b64encode(bio.getvalue()).decode()
     return 'base64://' + base64_str
+
+def group_pool_loader():
+    with open(join(path,'group_pool.json'),encoding='utf-8') as fp:
+        data = json.load(fp)
+    return data
+
+def get_pool_id(name):
+    if name == "up" or name == "当前up池": return "up"
+    elif "辉夜" in name or name == "辉夜up池": return "huiye"
+    elif "天麻" in name or name == "天麻up池": return "saki"
+    elif "标配" in name or name == "标配池": return "normal"
+    elif "斗牌" in name or name == "斗牌传说up池": return "douhun"
+    elif "狂赌" in name or name == "狂赌up池": return "kuangdu"
+    else : return None
+
+def get_pool_name(id):
+    if id == "up": return "当前up池"
+    elif id == "huiye": return "辉夜up池"
+    elif id == "saki": return "天麻up池"
+    elif id == "normal": return "标配池"
+    elif id == "douhun": return "斗牌传说up池"
+    elif id == "kuangdu": return "狂赌up池"
