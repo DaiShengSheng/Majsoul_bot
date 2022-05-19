@@ -1,64 +1,68 @@
-# Majsoul_bot
+<p align="center">
+  <a href="https://github.com/KimigaiiWuyi/GenshinUID/"><img src="https://s2.loli.net/2022/05/20/SNaol8TUYMXLAwW.png" width="256" height="256" alt="GenshinUID"></a>
+</p>
+<h1 align = "center">Majsoul_bot</h1>
+<h4 align = "center">✨ 基于<a href="https://github.com/Ice-Cirno/HoshinoBot" target="_blank">HoshinoBot V2</a>的雀魂Majsoul多功能插件✨ </h4>
+<div align = "center">
+        <a href="https://github.com/DaiShengSheng/Majsoul_bot/wiki" target="_blank">说明文档</a> &nbsp; · &nbsp;
+        <a href="https://github.com/DaiShengSheng/Majsoul_bot/wiki#%E4%B8%A8%E6%8C%87%E4%BB%A4%E5%88%97%E8%A1%A8" target="_blank">指令列表</a> &nbsp; · &nbsp;
+        <a href="https://github.com/DaiShengSheng/Majsoul_bot/wiki#%E4%B8%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-qa">常见问题</a>
+</div>
+<h4 align = "center"></h4>
+<div align="center">
+  <a href="https://github.com/DaiShengSheng/Majsoul_bot">
+    <img src="https://img.shields.io/badge/python-3.8%2B-yellow">
+  </a>
+  <a href="https://github.com/Mrs4s/go-cqhttp">
+    <img src="https://img.shields.io/badge/go--cqhttp-1.0.0-red">
+  </a>
+   <a href="https://github.com/Ice-Cirno/HoshinoBot">
+    <img src="https://img.shields.io/badge/HoshinoBot-V2.0.0-green">
+  </a>
+  <a href="https://github.com//HoshinoBot">
+    <img src="https://img.shields.io/badge/license-AGPL--3.0-blue">
+  </a>
+</div>
 
-### This is a Majsoul plugin for [HoshinoBot](https://github.com/Ice-Cirno/HoshinoBot)
-### 这是一个[HoshinoBot](https://github.com/Ice-Cirno/HoshinoBot)的雀魂相关插件
-### 本项目目前正在扩展，后续会扩展更多功能，敬请期待
+## **丨前言&插件简介**
+一个雀魂信息查询 Bot 插件，该插件不包括本体，应该配合[**HoshinoBot**](https://github.com/Ice-Cirno/HoshinoBot)并结合[**go-cqhttp**](https://github.com/Mrs4s/go-cqhttp)使用：
 
-
-# 前言 
 项目地址：https://github.com/DaiShengSheng/Majsoul_bot
 
 本插件数据来源于雀魂牌谱屋:https://amae-koromo.sapk.ch/
 
-由于牌谱屋不收录铜之间以及银之间牌谱，故所有数据仅统计2019年11月29日后金场及以上场次的数据
+由于牌谱屋不收录铜之间以及银之间牌谱，故所有数据仅统计**2019年11月29日后**金场及以上场次的数据
 
-这个项目使用的HoshinoBot的消息触发器，如果你了解其他QQ机器人框架的api(比如nonebot)可以只修改消息触发器就将本项目移植到其他框架
+这个项目使用的**HoshinoBot**的消息触发器，如果你了解其他QQ机器人框架的api(比如nonebot)可以只修改消息触发器就将本项目移植到其他框架
 
-移植后转载及发布请标注本项目原地址，谢谢
+移植后转载及发布请标注本项目原地址，谢谢。
 
-# 安装方法
-
+## 丨安装方法
 下面介绍HoshinoBot的安装方法
 
-在 HoshinoBot\hoshino\modules 目录下使用以下命令拉取本项目
+1. 在 HoshinoBot\hoshino\modules 目录下使用以下命令拉取本项目
 ```
 git clone https://github.com/Daishengsheng/Majsoul_bot.git
 ```
-然后使用如下命令安装依赖
+2. 然后使用如下命令安装依赖
 ```
 pip install -r requirements.txt
 ```
-然后在 HoshinoBot\\hoshino\\config\\\__bot__.py 文件的 MODULES_ON 加入 Majsoul_bot
+3. 然后在 HoshinoBot\\hoshino\\config\\\__bot__.py 文件的 MODULES_ON 加入 Majsoul_bot
+4. 重启 HoshinoBot，进入机器人在的群聊，即可正常使用本插件。
 
-重启 HoshinoBot
+## 丨已实现的功能列表
+### 丨战绩查询&订阅模块
+_基于雀魂牌谱屋提供的 API_
+* 金之间以上的个人总体数据查询（包括总体对局信息、南场/东场个人的对局信息、放铳率、位次等）
+* 个人特定段位场的总体详细数数据查询（如个人在金之间/玉之间对局的的详细信息）
+* 金之间以上的个人牌谱查询（可查询近期个人最近五场的对局牌谱信息）
+* 对局信息订阅与播报（基于牌谱屋对绑定的昵称进行对局监控）
+### 丨其他功能模块
+* 雀魂卡池的模拟抽卡（支持切换联动UP池）
+* 麻将猜手牌（麻兜，代码源自[**艾琳佬的插件**](https://github.com/yuyumoko/mahjong-hand-guess)）
 
-
-# 相关指令
-### 牌谱及个人数据查询
-命令  | 说明 | 例
-------------- | ------------- | --------------
-雀魂信息/雀魂查询 昵称  | 查询该昵称的基本对局数据(所有场次) | 雀魂信息 天才麻将杏杏
-三麻信息/三麻查询 昵称 | 查询该昵称的三麻的基本对局数据(所有场次) | 三麻信息 天才麻将杏杏
-雀魂信息/雀魂查询 (金/金之间/金场/玉/王座) 昵称 | 查询该ID在金/玉/王座之间的详细数据 | 雀魂信息 王座 天才麻将杏杏
-三麻信息/三麻查询 (金/金之间/金场/玉/王座) 昵称 | 查询该ID在三麻金/玉/王座之间的详细数据 | 三麻信息 王座 天才麻将杏杏
-雀魂牌谱/牌谱查询 昵称 | 查询该ID下最近五场的四麻对局信息 |  雀魂牌谱 天才麻将杏杏
-三麻牌谱 昵称 | 查询该ID下最近五场的三麻对局信息 |  三麻牌谱 天才麻将杏杏
-
-### 雀魂对局订阅
-命令 | 说明 | 例
-------------- | ------------- | --------------
-雀魂订阅 昵称 | 订阅该昵称在金之间以上的四麻对局信息 | 雀魂订阅 天才麻将杏杏
-三麻订阅 昵称 | 订阅该昵称在金之间以上的三麻对局信息 | 三麻订阅 天才麻将杏杏
-(取消/关闭)雀魂订阅 昵称| 将该昵称在本群的订阅暂时关闭 | 关闭雀魂订阅 天才麻将杏杏
-(取消/关闭)三麻订阅 昵称| 将该昵称在本群的三麻订阅暂时关闭 | 关闭三麻订阅 天才麻将杏杏
-开启雀魂订阅 昵称 | 将该昵称在本群的订阅开启 | 开启雀魂订阅 天才麻将杏杏
-开启三麻订阅 昵称 | 将该昵称在本群的三麻订阅开启 | 开启三麻订阅 天才麻将杏杏
-删除雀魂订阅 昵称 | 将该昵称在本群的订阅删除 | 删除雀魂订阅 天才麻将杏杏
-删除三麻订阅 昵称 | 将该昵称在本群的三麻订阅删除 | 删除三麻订阅 天才麻将杏杏
-雀魂订阅状态 | 查询本群的雀魂订阅信息的开启状态 | 雀魂订阅状态
-三麻订阅状态 | 查询本群的雀魂三麻订阅信息的开启状态 | 三麻订阅状态
-
-# 效果演示
+## 丨效果演示
 ### 基本数据查询
 ![基本数据查询](https://github.com/DaiShengSheng/Majsoul_bot/blob/master/screenshot/selectBasicInfo.png) 
 ### 详细数据查询
@@ -70,42 +74,20 @@ pip install -r requirements.txt
 ### 订阅的开启与删除
 ![订阅的开启与删除](https://github.com/DaiShengSheng/Majsoul_bot/blob/master/screenshot/ControlRecord.png)
 
-# 近期更新计划
-* 个人信息查询的图形化页面编写（更好看的UI）
-* 雀魂卡池的的模拟抽卡（已完成）
-* 麻兜（麻将猜手牌）
+## 丨常见问题 Q&A
+### 丨为何 Bot 启动时，报错类似No module named 'xxxxx'？
+依赖未安装，使用命令pip install xxxxx即可.
 
-# 更新记录
-### 2022-05-17
-* 更新了雀魂的抽卡功能
-* 添加了雀魂up卡池的切换
+若无效可尝试pip3 install xxxxx或者pip39 install xxxxx
+### 丨为何我对局结束后 Bot 没有播报我的对局？
+由于本插件使用的是牌谱屋的API，雀魂牌谱屋获取对局信息存在延迟，等待片刻即可。
+### 丨为何查询不到我的个人信息？
+由于牌谱屋只统计金之间以上的数据，请务必在查询或者订阅前在金之间对局一次，然后等待牌谱屋更新。
 
-### 2021-10-19
-* 运用极其暴力的手段修复了一些低级的bug，并更新了雀魂魂天段位的记分方式
+若还没有获取到相应信息，请再次进行查询。如果尝试几次都无法正常查询，请检查控制台后将报错截图提交到在issues当中
 
-### 2021-06-01
-* 更新了三麻信息查询以及订阅功能
-
-### 2021-05-31
-* 修复了由于获取订阅超时造成的Bot卡顿问题
-* 修复了长时间不启动对对局订阅更新失败的Bug
-* 将对局订阅播报更新为图片形式发送
-* 修复了订阅对局触发多条消息的Bug
-
-### 2021-05-30
-* 新增了金之间以上的四麻群友对局订阅(迫害)功能（群友又吃四了.jpg
-* 修复了一些不为人知的bug
-
-### 2021-05-27
-* 雀魂插件出生啦！初步实现了角色四麻数据的查询以及其牌谱的查询
-* 计划加入卡池(新建文件夹)以及三麻查询功能
-
-# 已知问题
-### 2021-06-02
-* bot在某些特定情况下可能不回应请求(等待修复)
-
-### 2021-05-30
-* bot在雀魂订阅获取更新时可能会卡死（已修复）
-* bot长时间不启动导致后续启动后对局订阅更新失败的bug（已修复）
-* 订阅信息下一版本更新后将会使用图片发布（已优化）
-
+## | 感谢
+- [Mrs4s / go-cqhttp](https://github.com/Mrs4s/go-cqhttp) ：cqhttp的golang实现，轻量、原生跨平台.  
+- [Ice-Cirno / HoshinoBot](https://github.com/Ice-Cirno/HoshinoBot) ：绝赞的QQ机器人HoshinoBot.  
+- [SAPikachu / amae-koromo](https://github.com/SAPikachu/amae-koromo) ：雀魂牌谱屋！本插件查询功能API来源于此.  
+- [yuyumoko / mahjong-hand-guess](https://github.com/yuyumoko/mahjong-hand-guess) ：麻兜功能小游戏.  
