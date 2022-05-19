@@ -19,7 +19,7 @@
    <a href="https://github.com/Ice-Cirno/HoshinoBot">
     <img src="https://img.shields.io/badge/HoshinoBot-V2.0.0-green">
   </a>
-  <a href="https://github.com//HoshinoBot">
+  <a href="">
     <img src="https://img.shields.io/badge/license-AGPL--3.0-blue">
   </a>
 </div>
