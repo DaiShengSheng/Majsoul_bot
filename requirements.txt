@@ -1,3 +1,6 @@
 bs4
 urllib3
 pillow
+ujson
+mahjong
+sqlitedict
