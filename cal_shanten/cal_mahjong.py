@@ -183,6 +183,9 @@ def calc_shanten_14(hc: str):
     hc = convert_hc_to_list(hc)
     if sum(hc) != 14:
         return "手牌数量不足,请输入14张手牌或检查输入牌型是否存在问题。"
+    for amount in hc:
+        if amount >4:
+            return "手牌枚数异常,请检查输入牌型是否存在问题。"
     xt_list = []
     for x in range(len(hc)):
         if hc[x] > 0:
@@ -194,11 +197,15 @@ def calc_shanten_14(hc: str):
             # 复位
             hc[x] += 1
     # 最小向听数
+    if xt_list == []:
+        result_list.append("手牌状态：十三不搭\n\n")
+        result_list.append("依据场况切手牌中任意一张牌即可。\n")
+        return result_list
     xt_min = min([x[1][0] for x in xt_list])
     if xt_min == 0:
         result_list.append("手牌状态：聴牌\n\n")
     else:
-        result_list.append("手牌状态：" + f"{xt_min}向听\n")
+        result_list.append("手牌状态：" + f"{xt_min}向听\n\n")
     card_advice_list = []
     for xxt in xt_list:
         xt = xxt[1]
