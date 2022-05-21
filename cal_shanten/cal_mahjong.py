@@ -182,7 +182,7 @@ def calc_shanten_14(hc: str):
     result_list.append("PS：本插件牌理暂不考虑七对子与国士无双听牌\n当前手牌:" + hc + "\n")
     hc = convert_hc_to_list(hc)
     if sum(hc) != 14:
-        return "手牌数量存在问题,请输入14张手牌或检查输入牌型是否存在问题。"
+        return "手牌数量存在问题,请输入14张手牌或检查输入牌型是否正常。"
     for amount in hc:
         if amount >4:
             return "手牌枚数异常,请检查输入牌型是否存在问题。"
