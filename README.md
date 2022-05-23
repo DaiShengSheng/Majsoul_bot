@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/KimigaiiWuyi/GenshinUID/"><img src="https://s2.loli.net/2022/05/20/SNaol8TUYMXLAwW.png" width="256" height="256" alt="GenshinUID"></a>
+  <a href="https://github.com/DaiShengSheng/Majsoul_bot/"><img src="https://s2.loli.net/2022/05/20/SNaol8TUYMXLAwW.png" width="256" height="256" alt="Majsoul_bot"></a>
 </p>
 <h1 align = "center">Majsoul_bot</h1>
 <h4 align = "center">✨ 基于<a href="https://github.com/Ice-Cirno/HoshinoBot" target="_blank">HoshinoBot V2</a>的雀魂Majsoul多功能插件✨ </h4>
@@ -26,6 +26,8 @@
 
 ## **丨前言&插件简介**
 一个雀魂信息查询 Bot 插件，该插件不包括本体，应该配合[**HoshinoBot**](https://github.com/Ice-Cirno/HoshinoBot)并结合[**go-cqhttp**](https://github.com/Mrs4s/go-cqhttp)使用：
+
+HoshinoBot雀魂插件交流群：[**244430070**](https://jq.qq.com/?_wv=1027&k=IHh5gtLm)，可在该群体验插件功能、反馈BUG、约友人场（大概）
 
 项目地址：https://github.com/DaiShengSheng/Majsoul_bot
 
