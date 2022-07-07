@@ -114,8 +114,8 @@ def selectRecord(id):
 def select_triRecord(id):
     localtime = time.time()
     urltime = str(int(localtime * 1000))  # 时间戳
-    basicurl = tribaseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=16.12.9.15.11.8"
+    basicurl = tribaseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=22.24.26.21.23.25"
     count = str(json.loads(getURL(basicurl))["count"])
-    recordurl = tribaseurl + "/player_records/"+str(id)+"/"+urltime+"/1262304000000?limit=5&mode=16.12.9.15.11.8&descending=true&tag="+count
+    recordurl = tribaseurl + "/player_records/"+str(id)+"/"+urltime+"/1262304000000?limit=5&mode=22.24.26.21.23.25&descending=true&tag="+count
     record = getURL(recordurl)
     return record
