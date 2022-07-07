@@ -104,9 +104,9 @@ async def TrimajsoulInfo(bot, ev: CQEvent):
                 message = message + printBasicInfo(IDdata[0],"0","3")
                 await bot.send(ev,message,at_sender=True)
     elif len(args) == 2:
+        nickname = args[1]
         if len(nickname) > 15:
             await bot.finish(ev, "昵称长度超过雀魂最大限制")
-        nickname = args[1]
         sv.logger.info("正在查询" + nickname + "的对局数据")
         message = "\n"
         room_level = ""
