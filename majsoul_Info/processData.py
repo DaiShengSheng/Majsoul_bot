@@ -133,7 +133,10 @@ def printRecordInfo(IDdata,num):
     message = message + "昵称：" + str(IDdata["nickname"]) + "  "
     score = int(IDdata["level"]["score"]) + int(IDdata["level"]["delta"])
     message = message + processLevelInfo(score, str(IDdata["level"]["id"]))
-    record = selectRecord(IDdata["id"])
+    if num == 3:
+        record = select_triRecord(IDdata["id"])
+    elif num == 4:
+        record = selectRecord(IDdata["id"])
     if isinstance(record, urllib.error.URLError):
         message = message + "没有查询到在该玩家近期的对局数据呢~\n"
     else:
