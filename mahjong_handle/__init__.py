@@ -1,4 +1,5 @@
-from hoshino import Service, MessageSegment, priv
+from hoshino import Service, priv
+from nonebot import MessageSegment
 from .handler import HandGuess
 from .utils import get_path
 
