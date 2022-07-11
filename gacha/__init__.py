@@ -1,6 +1,6 @@
-from hoshino import Service, priv, MessageSegment
+from hoshino import Service, priv
 from hoshino.util import DailyNumberLimiter
-from hoshino.typing import HoshinoBot,CQEvent
+from hoshino.typing import HoshinoBot,CQEvent, MessageSegment
 from .gacha import *
 
 sv = Service("雀魂抽卡")
