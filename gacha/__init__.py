@@ -1,4 +1,5 @@
-from hoshino import Service, priv, MessageSegment
+from hoshino import Service, priv
+from nonebot import MessageSegment
 from hoshino.util import DailyNumberLimiter
 from hoshino.typing import HoshinoBot,CQEvent
 from .gacha import *
