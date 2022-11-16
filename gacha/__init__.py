@@ -25,7 +25,7 @@ async def change_gacha(bot, ev: CQEvent):
     poolname = get_pool_id(user_input)
     if poolname == None:
         await bot.finish(ev, "没有找到该名称的卡池，请查看输入的卡池名称是否正确，当前支持的卡池有："
-                             +"当前up池、辉夜up池、天麻up池、标配池、斗牌传说up池、狂赌up池\n（请输入 切换雀魂卡池 卡池名称 进行切换）", at_sender=True)
+                             +"当前up池、辉夜up池、天麻up池1、天麻up池2、标配池、斗牌传说up池、狂赌up池\n（请输入 切换雀魂卡池 卡池名称 进行切换）", at_sender=True)
 
     group_id = ev["group_id"]
     group_pool = group_pool_loader()
