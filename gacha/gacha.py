@@ -47,7 +47,7 @@ def run_gacha(group_id):
     if purple_flag == 10 and result[9][0] <= 95:
         result[9][0] = 1
         result[9][1] = purple_gift[random.randint(0, len(purple_gift) - 1)]
-    return concat_images(result)
+    return concat_images(result,poolname)
 
 
 def single_pull(pool,pool_name):
@@ -61,6 +61,9 @@ def single_pull(pool,pool_name):
     gift_list = file_loader("gift")  # 读取礼物
     decoration = file_loader("decoration")  # 读取特效装扮
     person = file_loader("person")  # 读取人物
+    if pool_name != "normal" and pool_name != "up":
+        for filename in os.walk(abspath + "/resources/decoration/" + pool_name + "/"):
+            decoration.append(filename)
 
     objint = random.randint(1,100)
     if objint < 80:
@@ -84,7 +87,7 @@ def file_loader(file_type):
         filelist.append(filename)
     return filelist[0][2]
 
-def concat_images(image):
+def concat_images(image,pool_name):
     COL = 5  # 指定拼接图片的列数
     ROW = 2  # 指定拼接图片的行数
     UNIT_HEIGHT_SIZE = 266  # 图片高度
@@ -100,6 +103,8 @@ def concat_images(image):
             imgpath = abspath + "/resources/person/"
         else:
             imgpath = abspath + "/resources/decoration/"
+        if os.path.exists(imgpath + image_names[index]) == False:
+            imgpath = abspath + "/resources/decoration/" + pool_name + "/"
         img = Image.open(imgpath + image_names[index])
         img = img.resize((256, 256), Image.ANTIALIAS)
         image_files.append(img)  # 读取所有用于拼接的图片
@@ -125,7 +130,8 @@ def group_pool_loader():
 def get_pool_id(name):
     if name == "up" or name == "当前up池": return "up"
     elif "辉夜" in name or name == "辉夜up池": return "huiye"
-    elif "天麻" in name or name == "天麻up池": return "saki"
+    elif name == "天麻up池1": return "saki1"
+    elif name == "天麻up池2": return "saki2"
     elif "标配" in name or name == "标配池": return "normal"
     elif "斗牌" in name or name == "斗牌传说up池": return "douhun"
     elif "狂赌" in name or name == "狂赌up池": return "kuangdu"
@@ -134,7 +140,8 @@ def get_pool_id(name):
 def get_pool_name(id):
     if id == "up": return "当前up池"
     elif id == "huiye": return "辉夜up池"
-    elif id == "saki": return "天麻up池"
+    elif id == "saki1": return "天麻up池1"
+    elif id == "saki2": return "天麻up池2"
     elif id == "normal": return "标配池"
     elif id == "douhun": return "斗牌传说up池"
     elif id == "kuangdu": return "狂赌up池"
