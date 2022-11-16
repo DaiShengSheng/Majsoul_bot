@@ -64,7 +64,9 @@ def single_pull(pool,pool_name):
     if pool_name != "normal" and pool_name != "up":
         for filename in os.walk(abspath + "/resources/decoration/" + pool_name + "/"):
             decoration.append(filename)
-
+    if pool_name == "up":
+        for filename in os.walk(abspath + "/resources/decoration/saki/"):
+            decoration.append(filename)
     objint = random.randint(1,100)
     if objint < 80:
         prop = gift_list[random.randint(0, len(gift_list)-1)]
@@ -103,8 +105,8 @@ def concat_images(image,pool_name):
             imgpath = abspath + "/resources/person/"
         else:
             imgpath = abspath + "/resources/decoration/"
-        if os.path.exists(imgpath + image_names[index]) == False:
-            imgpath = abspath + "/resources/decoration/" + pool_name + "/"
+            if os.path.exists(imgpath + image_names[index]) == False:
+                imgpath = abspath + "/resources/decoration/" + pool_name + "/"
         img = Image.open(imgpath + image_names[index])
         img = img.resize((256, 256), Image.ANTIALIAS)
         image_files.append(img)  # 读取所有用于拼接的图片
