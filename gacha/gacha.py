@@ -61,12 +61,16 @@ def single_pull(pool,pool_name):
     gift_list = file_loader("gift")  # 读取礼物
     decoration = file_loader("decoration")  # 读取特效装扮
     person = file_loader("person")  # 读取人物
-    if pool_name != "normal" and pool_name != "up":
+    if pool_name != "normal" and pool_name != "up" and pool_name != "kuangdu" and pool_name != "douhun":
+        tmp_list = []
         for filename in os.walk(abspath + "/resources/decoration/" + pool_name + "/"):
-            decoration.append(filename)
+            tmp_list.append(filename)
+        decoration = decoration + tmp_list[0][2]
     if pool_name == "up":
-        for filename in os.walk(abspath + "/resources/decoration/saki/"):
-            decoration.append(filename)
+        tmp_list = []
+        for filename in os.walk(abspath + "/resources/decoration/saki2/"):
+            tmp_list.append(filename)
+        decoration = decoration + tmp_list[0][2]
     objint = random.randint(1,100)
     if objint < 80:
         prop = gift_list[random.randint(0, len(gift_list)-1)]
@@ -90,6 +94,8 @@ def file_loader(file_type):
     return filelist[0][2]
 
 def concat_images(image,pool_name):
+    if pool_name == "up":
+        pool_name = "saki2"
     COL = 5  # 指定拼接图片的列数
     ROW = 2  # 指定拼接图片的行数
     UNIT_HEIGHT_SIZE = 266  # 图片高度
