@@ -24,6 +24,7 @@
   </a>
 </div>
 
+## 你先别急，天麻卡池下班后更新！！！（作者2022.11.16留）
 ## **丨前言&插件简介**
 一个雀魂信息查询 Bot 插件，该插件不包括本体，应该配合[**HoshinoBot**](https://github.com/Ice-Cirno/HoshinoBot)并结合[**go-cqhttp**](https://github.com/Mrs4s/go-cqhttp)使用：
 
