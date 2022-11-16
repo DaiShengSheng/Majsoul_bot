@@ -3,6 +3,7 @@
 </p>
 <h1 align = "center">Majsoul_bot</h1>
 <h4 align = "center">✨ 基于<a href="https://github.com/Ice-Cirno/HoshinoBot" target="_blank">HoshinoBot V2</a>的雀魂Majsoul多功能插件✨ </h4>
+<h4 align = "center">🌸 天麻联动二号卡池已更新 🌸 </h4>
 <div align = "center">
         <a href="https://github.com/DaiShengSheng/Majsoul_bot/wiki" target="_blank">说明文档</a> &nbsp; · &nbsp;
         <a href="https://github.com/DaiShengSheng/Majsoul_bot/wiki#%E4%B8%A8%E6%8C%87%E4%BB%A4%E5%88%97%E8%A1%A8" target="_blank">指令列表</a> &nbsp; · &nbsp;
@@ -24,7 +25,7 @@
   </a>
 </div>
 
-## 你先别急，天麻卡池下班后更新！！！（作者2022.11.16留）
+
 ## **丨前言&插件简介**
 一个雀魂信息查询 Bot 插件，该插件不包括本体，应该配合[**HoshinoBot**](https://github.com/Ice-Cirno/HoshinoBot)并结合[**go-cqhttp**](https://github.com/Mrs4s/go-cqhttp)使用：
 
