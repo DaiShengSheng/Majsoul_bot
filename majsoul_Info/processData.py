@@ -161,7 +161,10 @@ def processExtendInfo(info,room_level,sessions):
     message = message + "追立率：" + str(round(float(removeNull(data["追立率"]))*100,2)) + "%  \n"
     message = message + "平均打点：" + str(removeNull(data["平均打点"])) + "  "
     message = message + "平均铳点：" + str(removeNull(data["平均铳点"])) + "  "
-    message = message + "最大连庄：" + str(removeNull(data["最大连庄"])) + "  "
+    try:
+        message = message + "最大连庄：" + str(removeNull(data["最大连庄"])) + "  "
+    except:
+        message = message + "最大连庄：0  "
     message = message + "和了巡数：" + str(round(float(removeNull(data["和了巡数"])),2)) + "  \n"
     return message
 
