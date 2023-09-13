@@ -226,7 +226,7 @@ def judgeLevel(level):
     elif level == "10501" or level == "20501": return "雀圣一"
     elif level == "10502" or level == "20502": return "雀圣二"
     elif level == "10503" or level == "20503": return "雀圣三"
-    elif level[0:4] == "1070" or level[0:4] == "2070": return "魂天"+str(level[4])
+    elif level[0:3] == "107" or level[0:3] == "207": return "魂天"+str(int(level[-2:]))
 
 def judgeRoom(room_level):
     if room_level == "0": return "总体"
@@ -256,7 +256,7 @@ def level_max(level):
     elif level == "10501" or level == "20501": return 4000
     elif level == "10502" or level == "20502": return 6000
     elif level == "10503" or level == "20503": return 9000
-    elif level[0:4] == "1070" or level[0:4] == "2070": return 2000
+    elif level[0:3] == "107" or level[0:3] == "207": return 2000
     #elif level == "10601" or level == "20601": return 9999999
 
 def level_start(level):
@@ -270,5 +270,5 @@ def level_start(level):
     elif level == "10501" or level == "20501": return 2000
     elif level == "10502" or level == "20502": return 3000
     elif level == "10503" or level == "20503": return 4500
-    elif level[0:4] == "1070" or level[0:4] == "2070": return 1000
+    elif level[0:3] == "107" or level[0:3] == "207": return 1000
     #elif level == "10601" or level == "20601": return 10000
