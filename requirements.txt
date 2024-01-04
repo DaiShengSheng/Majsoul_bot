@@ -4,3 +4,4 @@ pillow
 ujson
 mahjong
 sqlitedict
+aiohttp
