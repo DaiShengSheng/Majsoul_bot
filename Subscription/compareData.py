@@ -72,8 +72,8 @@ class ImgText:
         return mes
 
 
-def updateData(record,gid,id):
-    localdata = localLoad()
+def updateData(record,gid,id,num):
+    localdata = localLoad(num)
     data = json.loads(record)
     datalist = []
     message = ""
@@ -82,27 +82,16 @@ def updateData(record,gid,id):
             localdata[i]["uuid"] = data[0]["uuid"]
             localdata[i]["endTime"] = data[0]["endTime"]
             if localdata[i]["record_on"]:
-                message = message + processdata(data,4)
+                message = message + processdata(data,num)
         datalist.append(localdata[i])
-    with open(join(path,'account.json'),'w',encoding='utf-8') as fp:
-        json.dump(datalist,fp,indent=4)
+    if num == 4:
+        with open(join(path,'account.json'),'w',encoding='utf-8') as fp:
+            json.dump(datalist,fp,indent=4)
+    else:
+        with open(join(path,'tri_account.json'),'w',encoding='utf-8') as fp:
+            json.dump(datalist,fp,indent=4)
     return message
 
-def updateTriData(record,gid,id):
-    localdata = localTriLoad()
-    data = json.loads(record)
-    datalist = []
-    message = ""
-    for i in range(0,len(localdata)):
-        if data[0]["uuid"] != localdata[i]["uuid"] and gid == localdata[i]["gid"] and localdata[i]["id"] == id:
-            localdata[i]["uuid"] = data[0]["uuid"]
-            localdata[i]["endTime"] = data[0]["endTime"]
-            if localdata[i]["record_on"]:
-                message = message + processdata(data,3)
-        datalist.append(localdata[i])
-    with open(join(path,'tri_account.json'),'w',encoding='utf-8') as fp:
-        json.dump(datalist,fp,indent=4)
-    return message
 
 def processdata(data,num):
     message = "本群侦测到新的对局："
@@ -121,27 +110,20 @@ def convertTime(datatime):
     Time = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
     return Time
 
-def selectNickname(id):
+async def selectNickname(id,num):
     localtime = time.time()
     urltime = str(int(localtime * 1000))  # 时间戳
-    basicurl = baseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=16.12.9.15.11.8"
-    data = getURL(basicurl)
-    if isinstance(data,urllib.error.URLError):
-        return -1
+    if num == "4":
+        basicurl = baseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=16.12.9.15.11.8"
+    else:
+        basicurl = tribaseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=22.24.26.21.23.25"
+    data = await getURL(basicurl)
+    if data == "error":
+        return -404
     else:
         nickname = str(json.loads(data)["nickname"])
     return nickname
 
-def selectTriNickname(id):
-    localtime = time.time()
-    urltime = str(int(localtime * 1000))  # 时间戳
-    basicurl = tribaseurl + "/player_stats/" + str(id) + "/1262304000000/" + urltime + "?mode=22.24.26.21.23.25"
-    data = getURL(basicurl)
-    if isinstance(data,urllib.error.URLError):
-        return -1
-    else:
-        nickname = str(json.loads(data)["nickname"])
-    return nickname
 
 def judgeRoomLevel(level):
     if level == 8: return "金之间 四人东"
